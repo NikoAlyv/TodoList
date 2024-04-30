@@ -6,7 +6,7 @@ import {colors} from '../theme/colors';
 interface IButtons {
   text: string;
   onPress?: () => void;
-  style?: StyleProp<ViewStyle> | any;
+  style?: StyleProp<ViewStyle>;
 }
 export const Buttons: React.FC<IButtons> = ({text, onPress, style}) => {
   return (

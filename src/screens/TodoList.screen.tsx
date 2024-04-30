@@ -10,6 +10,8 @@ import {
 import {colors} from '../theme/colors';
 import {Buttons} from '../components/Buttons';
 import Trash from '../assets/vectors/trash.svg';
+
+// interface TodoList
 interface TodoListScreenProps {
   navigation: any;
 }
@@ -19,6 +21,7 @@ export const TodoListScreen: React.FC<TodoListScreenProps> = ({navigation}) => {
   const [tasks, setTasks] = useState<string[]>([]);
   const [completedTasks, setCompletedTasks] = useState<string[]>([]);
 
+  // add task function
   const addTask = () => {
     if (task.trim() !== '') {
       setTasks([...tasks, task]);
@@ -26,12 +29,17 @@ export const TodoListScreen: React.FC<TodoListScreenProps> = ({navigation}) => {
     }
   };
 
+  //listing the task
   const completeTask = (index: number) => {
-    const completedTask = tasks[index];
-    setCompletedTasks([...completedTasks, completedTask]);
-    const newTasks = [...tasks];
-    newTasks.splice(index, 1);
-    setTasks(newTasks);
+    if (index < 0 || index >= tasks.length) {
+      return;
+    }
+    const taskToComplete = tasks[index];
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    const updatedCompletedTasks = [...completedTasks, taskToComplete];
+
+    setTasks(updatedTasks);
+    setCompletedTasks(updatedCompletedTasks);
   };
 
   return (
